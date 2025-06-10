@@ -13,7 +13,14 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
-  correntCategoryId: number = 1;
+  currentCategoryId: number = 1;
+  currentCategoryName: string = '';
+  searchMode: boolean = false;
+
+  thePageNumber: number = 1;
+  thePageSize: number = 10;
+  theTotalElements: number = 0;
+
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -23,27 +30,46 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  listProducts() {
-    this.productService.getProducts().subscribe(
+  // listProducts() {
+  //   this.productService.getProducts().subscribe(
+  //     data => {
+  //       this.products = data;
+  //     }
+  //   );
+  // }
+
+  getListProductsByCategoryId() {
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+    if (this.searchMode) {
+      this.handleSearchProducts();
+    } else {
+      this.handleListProducts();
+    }
+  }
+
+  handleListProducts() {
+        const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
+    const hasCategoryName: boolean = this.route.snapshot.paramMap.has('name');
+    console.log('hasCategoryName: ' + hasCategoryName);
+    if (hasCategoryId && hasCategoryName) {
+      // Get the 'id' parameter from the route
+      this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
+      this.currentCategoryName = this.route.snapshot.paramMap.get('name')!;
+    }
+
+    this.productService.getProductsByCategoryId(this.currentCategoryId).subscribe(
       data => {
         this.products = data;
       }
     );
   }
 
-  getListProductsByCategoryId() {
-
-    // Check if 'id' parameter is available in the route
-    const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
-    if (hasCategoryId) {
-      // Get the 'id' parameter from the route
-      this.correntCategoryId = +this.route.snapshot.paramMap.get('id')!;
-    }
-
-    this.productService.getProductsByCategoryId(this.correntCategoryId).subscribe(
+  handleSearchProducts() {
+    const keyword: string = this.route.snapshot.paramMap.get('keyword')!;
+    this.productService.searchProducts(keyword).subscribe(
       data => {
         this.products = data;
       }
-    );
+    )
   }
 }
