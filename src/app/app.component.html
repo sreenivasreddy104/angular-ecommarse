@@ -3,12 +3,11 @@
   <!-- MENU SIDEBAR-->
   <aside class="menu-sidebar d-none d-lg-block">
     <div class="shop-with-me">
-      <a href="#">
+      <a routerLink="/products">
         <img src="assets/images/shop-with-me.png" alt="shop-with-me" class="img-responsive">
       </a>
     </div>
     <app-product-category-manu></app-product-category-manu>
-
   </aside>
   <!-- END MENU SIDEBAR-->
 
@@ -20,11 +19,7 @@
         <div class="container-fluid">
           <div class="header-wrap">
             <app-search></app-search>
-            <div class="cart-area d-n">
-              <a href="shopping-detail.html">
-                <div class="total">19.22 <span> 2</span> </div> <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-              </a>
-            </div>
+            <app-cart-status></app-cart-status>
           </div>
           <div class="account-wrap"></div>
         </div>
