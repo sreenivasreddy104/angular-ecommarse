@@ -9,8 +9,8 @@ import { State } from '../common/state';
 })
 export class ShopWithMeFormService {
 
-  private countriesUrl = 'http://localhost:8080/countries';
-  private statesUrl = 'http://localhost:8080/states';
+  private countriesUrl = 'http://localhost:9090/countries';
+  private statesUrl = 'http://localhost:9090/states';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -11,8 +11,8 @@ import { get } from 'http';
 })
 export class ProductService {
 
-  private baseUrl = "http://localhost:8080/products";
-  private categoryUrl = "http://localhost:8080/product-category";
+  private baseUrl = "http://localhost:9090/products";
+  private categoryUrl = "http://localhost:9090/product-category";
 
   constructor(private httpClient: HttpClient) { }
 

@@ -4,13 +4,13 @@ export default {
     clientId: "fQJKORP17MCmL1iK5S3fykli0CvylGS9",
     authorizationParams: {
       redirect_uri: "http://localhost:4200",
-      audience: "http://localhost:8080",
+      audience: "http://localhost:9090",
     },
   },
   httpInterceptor: {
     allowedList: [
-      'http://localhost:8080/orders/**',
-      'http://localhost:8080/checkout/purchase'
+      'http://localhost:9090/orders/**',
+      'http://localhost:9090/checkout/purchase'
     ],
   },
 }

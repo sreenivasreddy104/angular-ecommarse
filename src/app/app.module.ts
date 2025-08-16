@@ -15,11 +15,14 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
-import { AuthModule } from '@auth0/auth0-angular';
+import { AuthGuard, AuthModule } from '@auth0/auth0-angular';
 import myappconfig from './config/myappconfig';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { MembersPageComponent } from './components/members-page/members-page.component';
 
 const routes: Routes = [
+  // {path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard]},
+  { path: 'members', component: MembersPageComponent, canActivate: [AuthGuard] },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'cart-details', component: CartDetailsComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
@@ -41,7 +44,8 @@ const routes: Routes = [
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    MembersPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
